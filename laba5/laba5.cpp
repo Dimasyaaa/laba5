@@ -87,8 +87,6 @@ public:
         cin >> engineSize;
         cout << "Введите новую цену (текущая: " << price << "): ";
         cin >> price;
-        // cin.ignore();  // Чистим буфер перед следующим вводом
-        
     }
 };
 
@@ -190,8 +188,6 @@ int main() {
         }
 
         cout << endl;
-
     } while (choice != 6);
-
     return 0;
 }
