@@ -69,6 +69,27 @@ public:
     static bool sortByTransmission(const Car& a, const Car& b) {
         return a.getTransmission() < b.getTransmission();
     }
+
+    // Метод для редактирования информации о автомобиле
+    void editInfo() {
+        cout << "Редактирование информации о автомобиле:" << endl;
+        cout << "Введите новую марку автомобиля (текущая: " << maker << "): ";
+        getline(cin, maker);
+        cout << "Введите новую модель автомобиля (текущая: " << name << "): ";
+        getline(cin, maker);
+        cout << "Введите новый тип коробки передач (текущий: " << transmission << "): ";
+        getline(cin, transmission);
+        cout << "Введите новый цвет (текущий: " << color << "): ";
+        getline(cin, color);
+        cout << "Введите новый год выпуска (текущий: " << year << "): ";
+        cin >> year;
+        cout << "Введите новый мотор (текущий: " << engineSize << "): ";
+        cin >> engineSize;
+        cout << "Введите новую цену (текущая: " << price << "): ";
+        cin >> price;
+        // cin.ignore();  // Чистим буфер перед следующим вводом
+        
+    }
 };
 
 void displayMenu() {
@@ -77,8 +98,9 @@ void displayMenu() {
     cout << "1. Добавить автомобиль" << endl;
     cout << "2. Просмотреть каталог автомобилей" << endl;
     cout << "3. Сортировать автомобили" << endl;
-    cout << "4. Справка по работе" << endl;
-    cout << "5. Выход" << endl;
+    cout << "4. Редактировать автомобиль" << endl;
+    cout << "5. Справка по работе" << endl;
+    cout << "6. Выход" << endl;
     cout << "Выберите опцию: ";
 }
 
@@ -136,11 +158,31 @@ int main() {
             }
             break;
         }
-        case 4:
+        case 4: {
+            if (cars.empty()) {
+                cout << "Нет автомобилей для редактирования." << endl;
+                break;
+            }
+
+            cout << "Выберите номер автомобиля для редактирования (1-" << cars.size() << "): ";
+            int editIndex;
+            cin >> editIndex;
+            cin.ignore();  // Чистим буфер перед следующими вводами
+
+            if (editIndex < 1 || editIndex > cars.size()) {
+                cout << "Некорректный номер автомобиля." << endl;
+            }
+            else {
+                cars[editIndex - 1].editInfo();
+                cout << "Информация об автомобиле обновлена!" << endl;
+            }
+            break;
+        }
+        case 5:
             cout << "Справка по работе" << endl;
             cout << "САМОЕ ГЛАВНОЕ, пишем все на English!!!" << endl;
             break;
-        case 5:
+        case 6:
             cout << "Выход из программы." << endl;
             break;
         default:
@@ -149,7 +191,7 @@ int main() {
 
         cout << endl;
 
-    } while (choice != 5);
+    } while (choice != 6);
 
     return 0;
 }
